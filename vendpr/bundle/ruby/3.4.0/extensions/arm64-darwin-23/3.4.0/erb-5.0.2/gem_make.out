@@ -1,0 +1,19 @@
+current directory: /Users/everettbrandeau/code/fantasy_bake_off/vendpr/bundle/ruby/3.4.0/gems/erb-5.0.2/ext/erb/escape
+/Users/everettbrandeau/.rbenv/versions/3.4.6/bin/ruby extconf.rb
+checking for rb_ext_ractor_safe() in ruby.h... yes
+creating Makefile
+
+current directory: /Users/everettbrandeau/code/fantasy_bake_off/vendpr/bundle/ruby/3.4.0/gems/erb-5.0.2/ext/erb/escape
+make DESTDIR\= sitearchdir\=./.gem.20250922-20748-7yp8bh sitelibdir\=./.gem.20250922-20748-7yp8bh clean
+
+current directory: /Users/everettbrandeau/code/fantasy_bake_off/vendpr/bundle/ruby/3.4.0/gems/erb-5.0.2/ext/erb/escape
+make DESTDIR\= sitearchdir\=./.gem.20250922-20748-7yp8bh sitelibdir\=./.gem.20250922-20748-7yp8bh
+compiling escape.c
+linking shared-object erb/escape.bundle
+
+current directory: /Users/everettbrandeau/code/fantasy_bake_off/vendpr/bundle/ruby/3.4.0/gems/erb-5.0.2/ext/erb/escape
+make DESTDIR\= sitearchdir\=./.gem.20250922-20748-7yp8bh sitelibdir\=./.gem.20250922-20748-7yp8bh install
+/usr/bin/install -c -m 0755 escape.bundle ./.gem.20250922-20748-7yp8bh/erb
+
+current directory: /Users/everettbrandeau/code/fantasy_bake_off/vendpr/bundle/ruby/3.4.0/gems/erb-5.0.2/ext/erb/escape
+make DESTDIR\= sitearchdir\=./.gem.20250922-20748-7yp8bh sitelibdir\=./.gem.20250922-20748-7yp8bh clean

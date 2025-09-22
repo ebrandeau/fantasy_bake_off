@@ -1,0 +1,153 @@
+<div class="d-flex justify-content-between align-items-start flex-wrap gap-3 mb-4">
+  <div>
+    <div class="d-flex align-items-center gap-3">
+      <h1 class="mb-0">Season <%= @season.year %></h1>
+      <% status_class = @season.active? ? "bg-success" : "bg-secondary" %>
+      <span class="badge rounded-pill <%= status_class %>"><%= @season.active? ? "Active" : "Completed" %></span>
+    </div>
+    <p class="text-muted mb-2">Select weekly episodes, track contestants, and record official results.</p>
+    <div class="btn-group" role="group">
+      <%= link_to "Leaderboard", leaderboard_season_path(@season), class: "btn btn-outline-primary" %>
+      <% if admin? %>
+        <%= link_to "Edit Season", edit_season_path(@season), class: "btn btn-outline-secondary" %>
+        <%= link_to "New Episode", new_season_episode_path(@season), class: "btn btn-outline-success" %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="row g-4">
+  <div class="col-lg-4">
+    <div class="d-flex flex-column gap-3">
+      <div class="card shadow-sm">
+        <div class="card-header bg-white d-flex justify-content-between align-items-center">
+          <h2 class="h5 mb-0">Season Winner</h2>
+          <% if @season.winner_contestant %>
+            <span class="badge bg-success">Set</span>
+          <% else %>
+            <span class="badge bg-secondary">Pending</span>
+          <% end %>
+        </div>
+        <div class="card-body">
+          <% if admin? %>
+            <%= form_with(model: @season, url: season_path(@season), method: :patch, local: true) do |form| %>
+              <div class="mb-3">
+                <%= form.label :winner_contestant_id, "Official Winner", class: "form-label" %>
+                <%= form.collection_select :winner_contestant_id, @contestants, :id, :name,
+                  { include_blank: "Select contestant" }, { class: "form-select" } %>
+              </div>
+              <%= form.submit "Save Winner", class: "btn btn-primary w-100" %>
+            <% end %>
+          <% else %>
+            <p class="text-muted mb-1">Official Winner:</p>
+            <p class="fs-5 mb-0">
+              <%= @season.winner_contestant&.name || "Not announced yet" %>
+            </p>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="card shadow-sm">
+        <div class="card-header bg-white d-flex justify-content-between align-items-center">
+          <h2 class="h5 mb-0">Your Overall Pick</h2>
+          <% if @overall_pick&.winner %>
+            <span class="badge bg-primary">Locked In</span>
+          <% else %>
+            <span class="badge bg-warning text-dark">Required</span>
+          <% end %>
+        </div>
+        <div class="card-body">
+          <% if @overall_pick&.errors&.any? %>
+            <div class="alert alert-danger">
+              <ul class="mb-0">
+                <% @overall_pick.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+
+          <p class="text-muted mb-2">Pick who you think will win the season.</p>
+          <p class="fs-5"><%= @overall_pick&.winner&.name || "No pick yet" %></p>
+
+          <% if @overall_pick&.persisted? %>
+            <%= link_to "Edit Pick", edit_season_overall_pick_path(@season, @overall_pick), class: "btn btn-outline-primary w-100" %>
+          <% else %>
+            <%= link_to "Make Pick", new_season_overall_pick_path(@season), class: "btn btn-primary w-100" %>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="card shadow-sm">
+        <div class="card-header bg-white d-flex justify-content-between align-items-center">
+          <h2 class="h5 mb-0">Contestants</h2>
+          <% if admin? %>
+            <%= link_to "Add", new_season_contestant_path(@season), class: "btn btn-sm btn-outline-primary" %>
+          <% end %>
+        </div>
+        <div class="card-body">
+          <% if @contestants.any? %>
+            <ul class="list-group list-group-flush">
+              <% @contestants.each do |contestant| %>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  <span><%= contestant.name %></span>
+                  <span class="badge <%= contestant.eliminated? ? 'bg-danger' : 'bg-success' %>">
+                    <%= contestant.eliminated? ? 'Eliminated' : 'Active' %>
+                  </span>
+                </li>
+              <% end %>
+            </ul>
+          <% else %>
+            <p class="text-muted mb-0">No contestants yet.</p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-8">
+    <div class="card shadow-sm h-100">
+      <div class="card-header bg-white d-flex justify-content-between align-items-center">
+        <h2 class="h5 mb-0">Episodes</h2>
+        <% if admin? %>
+          <%= link_to "Schedule Episode", new_season_episode_path(@season), class: "btn btn-sm btn-outline-success" %>
+        <% end %>
+      </div>
+      <div class="card-body p-0">
+        <% if @episodes.any? %>
+          <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+              <thead class="table-light">
+                <tr>
+                  <th scope="col">Week</th>
+                  <th scope="col">Air Date</th>
+                  <th scope="col" class="text-end">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @episodes.each do |episode| %>
+                  <tr>
+                    <td class="fw-semibold">Episode <%= episode.number %></td>
+                    <td><%= episode.air_date ? l(episode.air_date, format: :long) : "TBD" %></td>
+                    <td class="text-end">
+                      <div class="btn-group btn-group-sm" role="group">
+                        <%= link_to "Open", season_episode_path(@season, episode), class: "btn btn-outline-primary" %>
+                        <% if admin? %>
+                          <%= link_to "Edit", edit_season_episode_path(@season, episode), class: "btn btn-outline-secondary" %>
+                        <% end %>
+                      </div>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        <% else %>
+          <div class="p-4 text-muted text-center">
+            <p class="mb-0">No episodes scheduled yet.</p>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

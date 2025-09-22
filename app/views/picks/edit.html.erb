@@ -1,0 +1,13 @@
+<div class="mb-3">
+  <%= link_to "← Back to Episode", season_episode_path(@season, @episode), class: "text-decoration-none" %>
+</div>
+
+<div class="card shadow-sm">
+  <div class="card-header bg-white">
+    <h1 class="h4 mb-0">Edit Pick</h1>
+    <p class="text-muted mb-0">Episode <%= @episode.number %> · Season <%= @season.year %></p>
+  </div>
+  <div class="card-body">
+    <%= render "form" %>
+  </div>
+</div>

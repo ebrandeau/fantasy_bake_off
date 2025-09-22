@@ -1,0 +1,45 @@
+/*
+ * Global styles for Fantasy Bake Off UI polish
+ */
+
+body {
+  font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+  background-color: #f3f4f6;
+  color: #1f2933;
+}
+
+main a {
+  text-decoration: none;
+}
+
+main a:hover {
+  text-decoration: underline;
+}
+
+.card {
+  border: none;
+  border-radius: 0.75rem;
+}
+
+.card-header {
+  border-bottom: none;
+  border-radius: 0.75rem 0.75rem 0 0;
+}
+
+.table thead th {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.btn-group .btn {
+  border-radius: 999px;
+}
+
+.badge {
+  font-weight: 600;
+}
+
+footer {
+  font-size: 0.9rem;
+}

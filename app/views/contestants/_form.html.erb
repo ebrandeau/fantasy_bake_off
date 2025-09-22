@@ -1,0 +1,29 @@
+<%= form_with(model: [@season, @contestant], class: "row g-3", local: true) do |form| %>
+  <% if @contestant.errors.any? %>
+    <div class="alert alert-danger">
+      <h2 class="h5"><%= pluralize(@contestant.errors.count, "error") %> prevented this contestant from being saved:</h2>
+      <ul class="mb-0">
+        <% @contestant.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="col-12">
+    <%= form.label :name, class: "form-label" %>
+    <%= form.text_field :name, class: "form-control", placeholder: "Baker Name" %>
+  </div>
+
+  <div class="col-12">
+    <div class="form-check">
+      <%= form.check_box :eliminated, class: "form-check-input", id: "contestant_eliminated" %>
+      <%= form.label :eliminated, class: "form-check-label" %>
+    </div>
+  </div>
+
+  <div class="col-12">
+    <%= form.submit class: "btn btn-primary" %>
+    <%= link_to "Cancel", season_path(@season), class: "btn btn-link" %>
+  </div>
+<% end %>

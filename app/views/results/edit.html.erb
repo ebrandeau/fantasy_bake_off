@@ -1,0 +1,14 @@
+<div class="mb-3 d-flex justify-content-between align-items-center">
+  <%= link_to "← Back to Result", season_episode_result_path(@season, @episode), class: "text-decoration-none" %>
+  <span class="badge bg-secondary">Episode <%= @episode.number %></span>
+</div>
+
+<div class="card shadow-sm">
+  <div class="card-header bg-white">
+    <h1 class="h4 mb-0">Edit Result</h1>
+    <p class="text-muted mb-0">Season <%= @season.year %></p>
+  </div>
+  <div class="card-body">
+    <%= render "form" %>
+  </div>
+</div>

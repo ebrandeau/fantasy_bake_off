@@ -1,0 +1,23 @@
+<%= form_with(model: [@season, @overall_pick], class: "row g-3", local: true) do |form| %>
+  <% if @overall_pick.errors.any? %>
+    <div class="alert alert-danger">
+      <h2 class="h5"><%= pluralize(@overall_pick.errors.count, "error") %> prevented this pick from being saved:</h2>
+      <ul class="mb-0">
+        <% @overall_pick.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="col-12">
+    <%= form.label :winner_id, "Overall Winner", class: "form-label" %>
+    <%= form.collection_select :winner_id, @contestants, :id, :name,
+      { include_blank: "Choose contestant" }, { class: "form-select" } %>
+  </div>
+
+  <div class="col-12">
+    <%= form.submit class: "btn btn-primary" %>
+    <%= link_to "Cancel", season_path(@season), class: "btn btn-link" %>
+  </div>
+<% end %>

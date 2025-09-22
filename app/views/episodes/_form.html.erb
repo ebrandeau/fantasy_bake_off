@@ -1,0 +1,51 @@
+<%= form_with(model: [@season, @episode], class: "row g-3", local: true) do |form| %>
+  <% if @episode.errors.any? %>
+    <div class="alert alert-danger">
+      <h2 class="h5"><%= pluralize(@episode.errors.count, "error") %> prevented this episode from being saved:</h2>
+      <ul class="mb-0">
+        <% @episode.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="col-md-4">
+    <%= form.label :number, class: "form-label" %>
+    <%= form.number_field :number, min: 1, class: "form-control", placeholder: "1" %>
+  </div>
+
+  <div class="col-md-4">
+    <%= form.label :air_date, class: "form-label" %>
+    <%= form.date_field :air_date, class: "form-control" %>
+  </div>
+
+  <div class="col-md-4">
+    <%= form.label :star_baker_id, "Star Baker", class: "form-label" %>
+    <%= form.collection_select :star_baker_id, @contestants, :id, :name,
+      { include_blank: "Select contestant" }, { class: "form-select" } %>
+  </div>
+
+  <div class="col-md-4">
+    <%= form.label :technical_winner_id, "Technical Winner", class: "form-label" %>
+    <%= form.collection_select :technical_winner_id, @contestants, :id, :name,
+      { include_blank: "Select contestant" }, { class: "form-select" } %>
+  </div>
+
+  <div class="col-md-4">
+    <%= form.label :handshake_id, "Handshake", class: "form-label" %>
+    <%= form.collection_select :handshake_id, @contestants, :id, :name,
+      { include_blank: "Select contestant" }, { class: "form-select" } %>
+  </div>
+
+  <div class="col-md-4">
+    <%= form.label :eliminated_id, "Eliminated", class: "form-label" %>
+    <%= form.collection_select :eliminated_id, @contestants, :id, :name,
+      { include_blank: "Select contestant" }, { class: "form-select" } %>
+  </div>
+
+  <div class="col-12">
+    <%= form.submit class: "btn btn-primary" %>
+    <%= link_to "Cancel", @episode.persisted? ? season_episode_path(@season, @episode) : season_path(@season), class: "btn btn-link" %>
+  </div>
+<% end %>

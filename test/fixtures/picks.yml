@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  episode: one
+  star_baker: one
+  technical_winner: one
+  handshake: one
+
+two:
+  user: two
+  episode: two
+  star_baker: two
+  technical_winner: two
+  handshake: two

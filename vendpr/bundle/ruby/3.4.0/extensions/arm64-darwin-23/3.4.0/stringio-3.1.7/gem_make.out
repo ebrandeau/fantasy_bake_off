@@ -1,0 +1,19 @@
+current directory: /Users/everettbrandeau/code/fantasy_bake_off/vendpr/bundle/ruby/3.4.0/gems/stringio-3.1.7/ext/stringio
+/Users/everettbrandeau/.rbenv/versions/3.4.6/bin/ruby extconf.rb
+checking for rb_io_mode_t in ruby/io.h... no
+creating Makefile
+
+current directory: /Users/everettbrandeau/code/fantasy_bake_off/vendpr/bundle/ruby/3.4.0/gems/stringio-3.1.7/ext/stringio
+make DESTDIR\= sitearchdir\=./.gem.20250922-20748-javcy6 sitelibdir\=./.gem.20250922-20748-javcy6 clean
+
+current directory: /Users/everettbrandeau/code/fantasy_bake_off/vendpr/bundle/ruby/3.4.0/gems/stringio-3.1.7/ext/stringio
+make DESTDIR\= sitearchdir\=./.gem.20250922-20748-javcy6 sitelibdir\=./.gem.20250922-20748-javcy6
+compiling stringio.c
+linking shared-object stringio.bundle
+
+current directory: /Users/everettbrandeau/code/fantasy_bake_off/vendpr/bundle/ruby/3.4.0/gems/stringio-3.1.7/ext/stringio
+make DESTDIR\= sitearchdir\=./.gem.20250922-20748-javcy6 sitelibdir\=./.gem.20250922-20748-javcy6 install
+/usr/bin/install -c -m 0755 stringio.bundle ./.gem.20250922-20748-javcy6
+
+current directory: /Users/everettbrandeau/code/fantasy_bake_off/vendpr/bundle/ruby/3.4.0/gems/stringio-3.1.7/ext/stringio
+make DESTDIR\= sitearchdir\=./.gem.20250922-20748-javcy6 sitelibdir\=./.gem.20250922-20748-javcy6 clean
